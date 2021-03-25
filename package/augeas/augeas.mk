@@ -4,11 +4,12 @@
 #
 ################################################################################
 
-AUGEAS_VERSION = 1.8.1
+AUGEAS_VERSION = 1.12.0
 AUGEAS_SITE = http://download.augeas.net
 AUGEAS_INSTALL_STAGING = YES
 AUGEAS_LICENSE = LGPL-2.1+
 AUGEAS_LICENSE_FILES = COPYING
+AUGEAS_CPE_ID_VENDOR = augeas
 AUGEAS_DEPENDENCIES = host-pkgconf readline libxml2
 
 AUGEAS_CONF_OPTS = --disable-gnulib-tests

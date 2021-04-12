@@ -12,6 +12,9 @@ PORT_NUMBER = 8000
 
 encoding = "utf-8"
 cpuloads = cpustat.GetCpuLoad()
+styles = '''<style> table{ border-collapse: collapse; }
+                    td, th { border: 1px solid #dddddd; text-align: left; padding: 8px;}
+                    tr:nth-child(even){ background-color: #dddddd; } </style>'''
 
 
 class MyHandler(BaseHTTPRequestHandler):
@@ -26,7 +29,7 @@ class MyHandler(BaseHTTPRequestHandler):
         s.send_response(200)
         s.send_header("Content-type", "text/html")
         s.end_headers()
-        s.wfile.write(bytes("<html><head><title>T1 - Lab Sisop. Marcelo Heredia.</title></head>", encoding))
+        s.wfile.write(bytes("<html><head><title>T1 - Lab Sisop. Marcelo Heredia.</title> %s </head>" % styles, encoding))
         s.wfile.write(bytes("<body><p>Hello!</p>", encoding))
         s.wfile.write(bytes("<p>Date and Time of access: %s</p>" % datetime.now().strftime('%c'), encoding))
         s.wfile.write(bytes("<p>System Uptime: %s seconds</p>" % get_uptime(), encoding))
@@ -36,13 +39,13 @@ class MyHandler(BaseHTTPRequestHandler):
         s.wfile.write(bytes("<p>Total RAM Memory: %s MB</p>" % meminfo[0], encoding))
         s.wfile.write(bytes("<p>Used Memory:  %s MB</p>" % meminfo[1], encoding))
         s.wfile.write(bytes("<p>System platform and version:  %s </p>" % platform.platform(), encoding))
-        s.wfile.write(bytes("<p>Proceseses open:  </p>", encoding))
+        s.wfile.write(bytes("<p>Processes open:  </p><table>", encoding))
         processes = get_processes()
-        for i in range(len(processes)):
-            s.wfile.write(bytes("<p> %s | %s </p>" % (processes[i][0], processes[i][1]), encoding))
+        s.wfile.write(bytes("<tr><th> %s </th>|<th> %s </th></tr>" % (processes[0][0], processes[0][1]), encoding))
+        for i in range(1, len(processes)):
+            s.wfile.write(bytes("<tr><td> %s </td>|<td> %s </td></tr>" % (processes[i][0], processes[i][1]), encoding))
 
-        s.wfile.write(bytes("<p>You accessed path: %s</p>" % s.path, encoding))
-        s.wfile.write(bytes("</body></html>", encoding))
+        s.wfile.write(bytes("</table></body></html>", encoding))
 
 
 def get_uptime():
@@ -95,4 +98,3 @@ if __name__ == '__main__':
         pass
     httpd.server_close()
     print(time.asctime(), "Server Stops - %s:%s" % (HOST_NAME, PORT_NUMBER))
-

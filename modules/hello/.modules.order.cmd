@@ -1,0 +1,1 @@
+cmd_/home/marcel/Documents/lab-sisop/linuxdistro/buildroot/modules/hello/modules.order := {   echo /home/marcel/Documents/lab-sisop/linuxdistro/buildroot/modules/hello/khello.ko; :; } | awk '!x[$$0]++' - > /home/marcel/Documents/lab-sisop/linuxdistro/buildroot/modules/hello/modules.order

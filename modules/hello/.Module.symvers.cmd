@@ -1,0 +1,1 @@
+cmd_/home/marcel/Documents/lab-sisop/linuxdistro/buildroot/modules/hello/Module.symvers := sed 's/ko$$/o/' /home/marcel/Documents/lab-sisop/linuxdistro/buildroot/modules/hello/modules.order | scripts/mod/modpost     -o /home/marcel/Documents/lab-sisop/linuxdistro/buildroot/modules/hello/Module.symvers -e -i Module.symvers   -T -
